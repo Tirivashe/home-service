@@ -1,8 +1,17 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
+import "./globals.css";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import {
+  AppShell,
+  AppShellHeader,
+  AppShellMain,
+  ColorSchemeScript,
+  MantineProvider,
+} from "@mantine/core";
+import Header from "@/components/Header";
+import { resolver, theme } from "@/theme";
 
 export const metadata = {
   title: "My Mantine app",
@@ -20,7 +29,18 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider
+          theme={theme}
+          cssVariablesResolver={resolver}
+          defaultColorScheme="light"
+        >
+          <AppShell header={{ height: 70 }}>
+            <AppShellHeader>
+              <Header />
+            </AppShellHeader>
+            <AppShellMain>{children}</AppShellMain>
+          </AppShell>
+        </MantineProvider>
       </body>
     </html>
   );
