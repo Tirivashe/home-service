@@ -29,11 +29,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider
-          theme={theme}
-          cssVariablesResolver={resolver}
-          defaultColorScheme="light"
-        >
+        <MantineProvider theme={theme} cssVariablesResolver={resolver}>
           <AppShell header={{ height: 70 }}>
             <AppShellHeader>
               <Header />
