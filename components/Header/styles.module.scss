@@ -14,10 +14,8 @@
 
   @include dark {
     & button {
-      color: var(--mantine-color-orange-5);
-
       @include hover {
-        color: var(--mantine-color-orange-2);
+        color: var(--mantine-color-orange-5);
       }
     }
   }
