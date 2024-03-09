@@ -1,0 +1,27 @@
+@import "../../_mantine.scss";
+
+.icon {
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  @include light {
+    background-color: var(--mantine-color-logo-orange-5);
+    color: white;
+    transition: all 0.1s ease-in;
+
+    @include hover {
+      background-color: var(--mantine-color-logo-orange-7);
+    }
+  }
+
+  @include dark {
+    color: var(--mantine-color-logo-orange-5);
+    border: 1px solid var(--mantine-color-logo-orange-5);
+    transition: all 0.1s ease-in;
+
+    @include hover {
+      background-color: var(--mantine-color-logo-orange-5);
+      color: white;
+    }
+  }
+}
