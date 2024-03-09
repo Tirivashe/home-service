@@ -8,6 +8,7 @@ import {
   Text,
   Title,
   rem,
+  useComputedColorScheme,
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
@@ -20,8 +21,11 @@ type Props = {};
 
 const Header = (props: Props) => {
   const theme = useMantineTheme();
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme({
+  const { toggleColorScheme } = useMantineColorScheme({
     keepTransitions: true,
+  });
+  const colorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
   });
   const sunIcon = (
     <IconSun
@@ -42,30 +46,17 @@ const Header = (props: Props) => {
   return (
     <Group justify="space-between" px="lg" align="center" h="100%" w="100%">
       <Group>
-        <Image
-          component={NextImage}
-          src="logo.svg"
-          alt="logo"
-          width={40}
-          height={40}
-        />
+        <Image component={NextImage} src="logo.svg" alt="logo" width={40} height={40} />
         <Title size="h3" className={styles["logo-text"]} visibleFrom="xs">
-          <Text
-            component="span"
-            c={colorScheme === "dark" ? theme.colors["logo-orange"][5] : ""}
-          >
+          <Text span c={colorScheme === "dark" ? theme.colors["logo-orange"][5] : ""}>
             Home
           </Text>
-          <Text
-            ml="xs"
-            component="span"
-            c={colorScheme === "dark" ? "" : theme.colors["logo-orange"][5]}
-          >
+          <Text ml="xs" span c={colorScheme === "dark" ? "" : theme.colors["logo-orange"][5]}>
             Services
           </Text>
         </Title>
       </Group>
-      <Group gap="sm" visibleFrom="md" className={styles.navlinks}>
+      <Group component="nav" gap="sm" visibleFrom="md" className={styles.navlinks}>
         <Button variant="transparent">Home</Button>
         <Button variant="transparent">Services</Button>
         <Button variant="transparent">Explore</Button>
