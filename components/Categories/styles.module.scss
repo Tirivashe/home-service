@@ -1,0 +1,21 @@
+@import "../../mantine";
+
+.category {
+  height: 120px;
+  width: 140px;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @include light {
+    background-color: var(--mantine-color-logo-orange-1);
+  }
+
+  @include dark {
+    border: 1px solid var(--mantine-color-logo-orange-5);
+  }
+}
