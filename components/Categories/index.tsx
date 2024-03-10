@@ -44,7 +44,7 @@ const Categories = (props: Props) => {
                 height={35}
                 fit="contain"
               />
-              <Text>{category.name}</Text>
+              <Text size="sm">{category.name}</Text>
             </Stack>
           ))}
       </SimpleGrid>
