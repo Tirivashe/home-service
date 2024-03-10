@@ -12,31 +12,30 @@ import {
 } from "@mantine/core";
 import Header from "@/components/Header";
 import { resolver, theme } from "@/theme";
+import { UrqlProvider } from "@/urql/client";
 
 export const metadata = {
   title: "My Mantine app",
   description: "I have followed setup instructions carefully",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-          <AppShell header={{ height: 70 }}>
-            <AppShellHeader>
-              <Header />
-            </AppShellHeader>
-            <AppShellMain>{children}</AppShellMain>
-          </AppShell>
-        </MantineProvider>
+        <UrqlProvider>
+          <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+            <AppShell header={{ height: 70 }}>
+              <AppShellHeader>
+                <Header />
+              </AppShellHeader>
+              <AppShellMain>{children}</AppShellMain>
+            </AppShell>
+          </MantineProvider>
+        </UrqlProvider>
       </body>
     </html>
   );
