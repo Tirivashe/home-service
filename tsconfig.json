@@ -15,6 +15,11 @@
     "plugins": [
       {
         "name": "next"
+      },
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "https://api-us-east-1-shared-usea1-02.hygraph.com/v2/cltjvdjf10k6007w06cch4bap/master",
+        "tadaOutputLocation": "./graphql-env.d.ts"
       }
     ],
     "paths": {
