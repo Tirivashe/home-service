@@ -12,3 +12,20 @@ export const GetCategoriesQuery = graphql(`
     }
   }
 `);
+
+export const GetPopularBusinessQuery = graphql(`
+  query QueryPopularBusinessList {
+    businessLists(where: { category: { name: "Cleaning" } }) {
+      id
+      name
+      contactPerson
+      address
+      category {
+        name
+      }
+      images {
+        url
+      }
+    }
+  }
+`);
