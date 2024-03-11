@@ -13,6 +13,7 @@ import {
 import Header from "@/components/Header";
 import { resolver, theme } from "@/theme";
 import { UrqlProvider } from "@/urql/client";
+import NextAuthSessionProvider from "./provider";
 
 export const metadata = {
   title: "My Mantine app",
@@ -26,16 +27,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ColorSchemeScript />
       </head>
       <body>
-        <UrqlProvider>
-          <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-            <AppShell header={{ height: 70 }}>
-              <AppShellHeader>
-                <Header />
-              </AppShellHeader>
-              <AppShellMain>{children}</AppShellMain>
-            </AppShell>
-          </MantineProvider>
-        </UrqlProvider>
+        <NextAuthSessionProvider>
+          <UrqlProvider>
+            <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+              <AppShell header={{ height: 70 }}>
+                <AppShellHeader>
+                  <Header />
+                </AppShellHeader>
+                <AppShellMain>{children}</AppShellMain>
+              </AppShell>
+            </MantineProvider>
+          </UrqlProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
