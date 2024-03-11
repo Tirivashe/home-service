@@ -26,7 +26,7 @@ const Categories = (props: Props) => {
 
   return (
     <Center component="section">
-      <SimpleGrid cols={{ base: 1, xs: 2, sm: 3, lg: 6 }} verticalSpacing="sm">
+      <SimpleGrid cols={{ base: 2, sm: 3, lg: 6 }} verticalSpacing="sm">
         {!!data &&
           data.categories.map((category) => (
             <Stack
