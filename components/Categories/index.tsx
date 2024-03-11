@@ -2,13 +2,13 @@
 import { useQuery } from "urql";
 import { GetCategoriesQuery } from "@/services/queries";
 import NextImage from "next/image";
-import { Center, Image, Loader, SimpleGrid, Skeleton, Stack, Text } from "@mantine/core";
+import { Center, Image, SimpleGrid, Skeleton, Stack, Text } from "@mantine/core";
 import styles from "./styles.module.scss";
 
 type Props = {};
 
 const Categories = (props: Props) => {
-  const [{ data, fetching, error }, reexecuteQuery] = useQuery({
+  const [{ data, fetching }] = useQuery({
     query: GetCategoriesQuery,
   });
 
