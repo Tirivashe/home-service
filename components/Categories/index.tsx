@@ -2,12 +2,15 @@
 import { useQuery } from "urql";
 import { GetCategoriesQuery } from "@/services/queries";
 import NextImage from "next/image";
+
 import { Center, Image, SimpleGrid, Skeleton, Stack, Text } from "@mantine/core";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Categories = (props: Props) => {
+  const { push } = useRouter();
   const [{ data, fetching }] = useQuery({
     query: GetCategoriesQuery,
   });
@@ -35,6 +38,7 @@ const Categories = (props: Props) => {
               align="center"
               justify="center"
               className={styles.category}
+              onClick={() => push(`/search/${category.name}`)}
             >
               <Image
                 component={NextImage}
@@ -44,7 +48,9 @@ const Categories = (props: Props) => {
                 height={35}
                 fit="contain"
               />
-              <Text size="sm">{category.name}</Text>
+              <Text size="sm" tt="capitalize">
+                {category.name}
+              </Text>
             </Stack>
           ))}
       </SimpleGrid>
