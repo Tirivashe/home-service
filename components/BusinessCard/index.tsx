@@ -23,7 +23,7 @@ const BusinessCard = ({ images, address, contactPerson, name, category }: Props)
           component={NextImage}
           src={images[0].url}
           alt="image"
-          height={300}
+          height={270}
           width={350}
           radius="md"
         />
