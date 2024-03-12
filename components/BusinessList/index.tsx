@@ -1,23 +1,27 @@
 "use client";
 
-import { GetPopularBusinessQuery } from "@/services/queries";
+import { GetBusinessByCategoryQuery } from "@/services/queries";
 import { Card, SimpleGrid, Skeleton, Stack, Title } from "@mantine/core";
 import React from "react";
 import { useQuery } from "urql";
 import BusinessCard from "../BusinessCard";
 
-type Props = {};
+type Props = {
+  title?: string;
+  categoryName?: string;
+};
 
-const BusinessList = (props: Props) => {
+const BusinessList = ({ title = "Popular Businesses", categoryName = "cleaning" }: Props) => {
   // TODO: remove fetch from here only if it is used in one component
   const [{ data, fetching }] = useQuery({
-    query: GetPopularBusinessQuery,
+    query: GetBusinessByCategoryQuery,
+    variables: { name: categoryName },
   });
 
   if (fetching) {
     return (
-      <Stack p="xl" mt="xl">
-        <Title order={2}>Popular Businesses</Title>
+      <Stack>
+        <Title order={2}>{title}</Title>
         <SimpleGrid cols={{ xs: 2, lg: 4 }} verticalSpacing="xl">
           {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
             <Card key={idx} shadow="sm" radius="md" withBorder>
@@ -39,8 +43,10 @@ const BusinessList = (props: Props) => {
   }
 
   return (
-    <Stack p="xl" mt="xl">
-      <Title order={2}>Popular Businesses</Title>
+    <Stack>
+      <Title order={2} tt="capitalize">
+        {title}
+      </Title>
       <SimpleGrid cols={{ xs: 2, lg: 4 }} verticalSpacing="xl">
         {!!data &&
           data.businessLists.map((business) => <BusinessCard key={business.id} {...business} />)}
