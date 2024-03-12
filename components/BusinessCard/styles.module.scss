@@ -1,0 +1,21 @@
+@import "../../mantine";
+
+.badge {
+  @include light {
+    background-color: var(--mantine-color-logo-orange-0);
+    color: var(--mantine-color-logo-orange-5);
+  }
+
+  @include dark {
+    background-color: transparent;
+    border: 1px solid var(--mantine-color-logo-orange-5);
+    color: var(--mantine-color-logo-orange-5);
+  }
+}
+
+.card {
+  transition: all 0.2s ease-in-out;
+  @include hover {
+    transform: scale(1.05);
+  }
+}

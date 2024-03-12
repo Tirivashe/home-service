@@ -1,25 +1,15 @@
 "use client";
 
 import { GetPopularBusinessQuery } from "@/services/queries";
-import {
-  Badge,
-  Button,
-  Card,
-  Image,
-  SimpleGrid,
-  Skeleton,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import NextImage from "next/image";
+import { Card, SimpleGrid, Skeleton, Stack, Title } from "@mantine/core";
 import React from "react";
 import { useQuery } from "urql";
-import styles from "./styles.module.scss";
+import BusinessCard from "../BusinessCard";
 
 type Props = {};
 
 const BusinessList = (props: Props) => {
+  // TODO: remove fetch from here only if it is used in one component
   const [{ data, fetching }] = useQuery({
     query: GetPopularBusinessQuery,
   });
@@ -53,29 +43,7 @@ const BusinessList = (props: Props) => {
       <Title order={2}>Popular Businesses</Title>
       <SimpleGrid cols={{ xs: 2, lg: 4 }} verticalSpacing="xl">
         {!!data &&
-          data.businessLists.map(({ id, name, address, contactPerson, category, images }) => (
-            <Card key={id} shadow="sm" radius="md" withBorder className={styles.card}>
-              <Card.Section>
-                <Image
-                  component={NextImage}
-                  src={images[0].url}
-                  alt="image"
-                  height={300}
-                  width={350}
-                  radius="md"
-                />
-              </Card.Section>
-              <Stack gap="0.3rem" py="sm">
-                <Badge className={styles.badge}>{category?.name}</Badge>
-                <Title order={4}>{name}</Title>
-                <Text c="logo-orange">{contactPerson}</Text>
-                <Text truncate="end">{address}</Text>
-                <div>
-                  <Button>Book Now</Button>
-                </div>
-              </Stack>
-            </Card>
-          ))}
+          data.businessLists.map((business) => <BusinessCard key={business.id} {...business} />)}
       </SimpleGrid>
     </Stack>
   );
