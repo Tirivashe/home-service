@@ -1,0 +1,40 @@
+@import "../../mantine";
+
+.category {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--mantine-color-gray-3);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  @include hover {
+    background-color: var(--mantine-color-logo-orange-0);
+    border: 1px solid var(--mantine-color-logo-orange-0);
+  }
+
+  &[data-active="true"] {
+    border: 1px solid var(--mantine-color-logo-orange-5);
+    background-color: transparent;
+    box-shadow: 3px 3px 10px var(--mantine-color-gray-5);
+    transform: scale(1.01);
+  }
+
+  @include dark {
+    color: #c9c9c9;
+    border: 1px solid var(--mantine-color-logo-orange-5);
+
+    @include hover {
+      background-color: var(--mantine-color-logo-orange-5);
+      border: 1px solid var(--mantine-color-logo-orange-5);
+      color: white;
+    }
+
+    &[data-active="true"] {
+      background-color: var(--mantine-color-logo-orange-5);
+      border: 1px solid var(--mantine-color-logo-orange-5);
+      box-shadow: 3px 3px 10px var(--mantine-color-logo-orange-9);
+      color: white;
+      transform: scale(1.01);
+    }
+  }
+}
