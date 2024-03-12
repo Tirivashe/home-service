@@ -12,6 +12,7 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
+import appLogo from "../../app/icons/logo.svg";
 import NextImage from "next/image";
 import React from "react";
 import styles from "./styles.module.scss";
@@ -49,7 +50,7 @@ const Header = (props: Props) => {
   return (
     <Group justify="space-between" px="lg" align="center" h="100%" w="100%">
       <Group>
-        <Image component={NextImage} src="logo.svg" alt="logo" width={40} height={40} />
+        <Image component={NextImage} src={appLogo} alt="logo" width={40} height={40} />
         <Title size="h3" className={styles["logo-text"]} visibleFrom="xs">
           <Text span c={colorScheme === "dark" ? theme.colors["logo-orange"][5] : ""}>
             Home
