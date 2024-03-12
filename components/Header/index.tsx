@@ -16,10 +16,13 @@ import NextImage from "next/image";
 import React from "react";
 import styles from "./styles.module.scss";
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
+import LoginButton from "../LoginButton";
 
 type Props = {};
 
 const Header = (props: Props) => {
+  const { data } = useSession();
   const theme = useMantineTheme();
   const { toggleColorScheme } = useMantineColorScheme({
     keepTransitions: true,
@@ -71,7 +74,7 @@ const Header = (props: Props) => {
           checked={colorScheme === "dark" ? true : false}
           onClick={toggleColorScheme}
         />
-        <Button>Login</Button>
+        <LoginButton data={data} />
       </Group>
     </Group>
   );
