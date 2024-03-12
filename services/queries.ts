@@ -13,9 +13,9 @@ export const GetCategoriesQuery = graphql(`
   }
 `);
 
-export const GetPopularBusinessQuery = graphql(`
-  query QueryPopularBusinessList {
-    businessLists(where: { category: { name: "Cleaning" } }) {
+export const GetBusinessByCategoryQuery = graphql(`
+  query QueryPopularBusinessList($name: String) {
+    businessLists(where: { category: { name: $name } }) {
       id
       name
       contactPerson
