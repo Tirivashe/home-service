@@ -1,5 +1,6 @@
 import NextAuth from "next-auth/next";
 import { NextAuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -7,18 +8,18 @@ const authOptions: NextAuthOptions = {
       id: "descope",
       name: "Descope",
       type: "oauth",
-      wellKnown: `https://api.descope.com/P2dYSBzvRPkTPc71SF7eOtfBqsSg/.well-known/openid-configuration`,
+      wellKnown: `https://api.descope.com/${process.env.DESCOPE_PROJECT_ID}/.well-known/openid-configuration`,
       authorization: { params: { scope: "openid email profile" } },
       idToken: true,
-      clientId: "P2dYSBzvRPkTPc71SF7eOtfBqsSg",
-      clientSecret: process.env.NEXT_PUBLIC_DESCOPE_API,
+      clientId: process.env.DESCOPE_PROJECT_ID,
+      clientSecret: process.env.DESCOPE_ACCESS_KEY,
       checks: ["pkce", "state"],
       profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-          image: profile.picture,
+          image: profile.image,
         };
       },
     },
@@ -29,25 +30,27 @@ const authOptions: NextAuthOptions = {
         return {
           ...token,
           access_token: account.access_token,
-          expires_at: Math.floor(Date.now() / 1000 + account.expires_in),
+          expires_at: Math.floor(
+            Date.now() / 1000 + (account?.expires_at ? account.expires_at : 1000)
+          ),
           refresh_token: account.refresh_token,
           profile: {
             name: profile?.name,
             email: profile?.email,
-            image: profile?.picture,
+            image: profile?.image,
           },
         };
-      } else if (Date.now() < token.expires_at * 1000) {
+      } else if (Date.now() < (token?.expires_at as any) * 1000) {
         return token;
       } else {
         try {
           const response = await fetch("https://api.descope.com/oauth2/v1/token", {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
-              client_id: "P2dYSBzvRPkTPc71SF7eOtfBqsSg",
-              client_secret: process.env.NEXT_PUBLIC_DESCOPE_API,
+              client_id: process.env.DESCOPE_PROJECT_ID ?? "",
+              client_secret: process.env.DESCOPE_ACCESS_KEY ?? "",
               grant_type: "refresh_token",
-              refresh_token: token.refresh_token,
+              refresh_token: token.refresh_token as any,
             }),
             method: "POST",
           });
@@ -69,7 +72,7 @@ const authOptions: NextAuthOptions = {
       }
     },
 
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: JWT }) {
       if (token.profile) {
         session.user = token.profile;
       }
