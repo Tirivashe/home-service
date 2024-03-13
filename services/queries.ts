@@ -47,3 +47,17 @@ export const GetBusinessByIdQuery = graphql(`
     }
   }
 `);
+
+export const GetSimilarBusinessByIdQuery = graphql(`
+  query SimilarBusinessByIdQuery($id: ID, $name: String) {
+    businessLists(where: { NOT: { id: $id }, AND: { category: { name: $name } } }) {
+      id
+      contactPerson
+      address
+      name
+      images {
+        url
+      }
+    }
+  }
+`);
