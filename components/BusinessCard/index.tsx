@@ -14,7 +14,7 @@ type Props = {
   address: string | null;
   contactPerson: string | null;
   name: string | null;
-  id: string | null;
+  id: string | number;
 };
 
 const BusinessCard = ({ id, images, address, contactPerson, name, category }: Props) => {
