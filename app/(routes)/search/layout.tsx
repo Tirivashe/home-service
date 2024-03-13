@@ -9,7 +9,7 @@ type Props = {
 
 const layout = ({ children }: Props) => {
   return (
-    <Grid style={{ overflow: "hidden" }} py="xl" px="lg">
+    <Grid style={{ overflow: "hidden" }} py="xl" px="lg" gutter="xl">
       <Grid.Col span={3} visibleFrom="sm">
         <CategorySideNav />
       </Grid.Col>
