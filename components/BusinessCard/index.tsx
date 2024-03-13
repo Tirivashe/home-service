@@ -2,6 +2,7 @@ import { Badge, Button, Card, Image, Stack, Text, Title } from "@mantine/core";
 import React from "react";
 import NextImage from "next/image";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 type Props = {
   images: {
@@ -13,11 +14,19 @@ type Props = {
   address: string | null;
   contactPerson: string | null;
   name: string | null;
+  id: string | null;
 };
 
-const BusinessCard = ({ images, address, contactPerson, name, category }: Props) => {
+const BusinessCard = ({ id, images, address, contactPerson, name, category }: Props) => {
   return (
-    <Card shadow="sm" radius="md" withBorder className={styles.card}>
+    <Card
+      shadow="sm"
+      radius="md"
+      withBorder
+      className={styles.card}
+      component={Link}
+      href={`/details/${id}`}
+    >
       <Card.Section>
         <Image
           component={NextImage}
