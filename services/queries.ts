@@ -29,3 +29,15 @@ export const GetBusinessByCategoryQuery = graphql(`
     }
   }
 `);
+
+export const GetBusinessByIdQuery = graphql(`
+  query BusinessByIdQuery($id: ID) {
+    businessList(where: { id: $id }) {
+      email
+      contactPerson
+      address
+      about
+      name
+    }
+  }
+`);
