@@ -1,0 +1,15 @@
+@import "../../../../mantine";
+
+.root {
+  &[data-size="responsive"] {
+    max-width: 80%;
+
+    @include smaller-than($mantine-breakpoint-sm) {
+      max-width: 90%;
+    }
+
+    @include smaller-than($mantine-breakpoint-xs) {
+      max-width: 100%;
+    }
+  }
+}
