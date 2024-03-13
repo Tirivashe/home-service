@@ -63,7 +63,7 @@ const Info = ({ business }: Props) => {
         align={{ base: "center", md: "end" }}
         w="auto"
         style={{ flex: 1 }}
-        gap="lg"
+        gap="md"
       >
         <ThemeIcon size="lg">
           <IconShare2 />
