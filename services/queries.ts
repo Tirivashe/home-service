@@ -38,6 +38,12 @@ export const GetBusinessByIdQuery = graphql(`
       address
       about
       name
+      category {
+        name
+      }
+      images {
+        url
+      }
     }
   }
 `);
