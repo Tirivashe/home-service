@@ -1,0 +1,25 @@
+@import "../../../../../mantine";
+
+.miniCard {
+  cursor: pointer;
+  padding: 0.2rem;
+
+  @include hover {
+    transition: all 0.1s ease;
+    outline: 1px solid var(--mantine-color-logo-orange-5);
+    border-radius: var(--mantine-radius-sm);
+
+    transform: scale(1.01);
+    @include light {
+      box-shadow: 5px 5px 10px var(--mantine-color-gray-5);
+    }
+
+    @include dark {
+      box-shadow: 5px 5px 5px var(--mantine-color-logo-orange-9);
+    }
+  }
+
+  & p {
+    text-wrap: wrap;
+  }
+}
