@@ -61,3 +61,38 @@ export const GetSimilarBusinessByIdQuery = graphql(`
     }
   }
 `);
+
+export const CreateBookingMutation = graphql(`
+  mutation CreateBookingMutation(
+    $id: ID
+    $date: String
+    $time: String
+    $userEmail: String
+    $userName: String
+  ) {
+    createBooking(
+      data: {
+        bookingStatus: Booked
+        businessList: { connect: { id: $id } }
+        date: $date
+        time: $time
+        userEmail: $userEmail
+        userName: $userName
+      }
+    ) {
+      id
+    }
+    publishManyBookings(to: PUBLISHED) {
+      count
+    }
+  }
+`);
+
+export const GetBookingsByBusinessIdQuery = graphql(`
+  query BookingsByBusinessId($id: ID, $date: String) {
+    bookings(where: { businessList: { id: $id }, date: $date }) {
+      date
+      time
+    }
+  }
+`);

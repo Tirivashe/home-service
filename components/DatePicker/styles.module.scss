@@ -1,0 +1,51 @@
+@import "/_mantine.scss";
+
+.datepicker {
+  & div[data-month-level],
+  div[data-year-level],
+  div[data-decade-level] {
+    border: 1px solid var(--mantine-color-gray-3);
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+}
+
+.timeslot {
+  @include dark {
+    border: 1px solid var(--mantine-color-gray-3);
+    background-color: transparent;
+    color: var(--mantine-color-gray-4);
+
+    &[data-disabled="true"] {
+      color: var(--mantine-color-gray-8);
+      border: 1px solid var(--mantine-color-gray-8);
+
+      &:hover {
+        color: var(--mantine-color-gray-8);
+        border: 1px solid var(--mantine-color-gray-8);
+        background-color: transparent;
+      }
+    }
+
+    @include hover {
+      border: 1px solid var(--mantine-color-logo-orange-5);
+      background-color: var(--mantine-color-logo-orange-5);
+      color: white;
+    }
+  }
+
+  &[data-selected="true"] {
+    border: 1px solid var(--mantine-color-logo-orange-5);
+    background-color: var(--mantine-color-logo-orange-5);
+    color: white;
+  }
+
+  &[data-disabled="true"] {
+    color: var(--mantine-color-gray-3);
+    border: 1px solid var(--mantine-color-gray-2);
+  }
+
+  border: 1px solid var(--mantine-color-gray-3);
+  background-color: transparent;
+  color: var(--mantine-color-gray-8);
+}

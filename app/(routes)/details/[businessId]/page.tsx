@@ -1,10 +1,14 @@
 "use client";
-import { GetBusinessByIdQuery, GetSimilarBusinessByIdQuery } from "@/services/queries";
+import {
+  CreateBookingMutation,
+  GetBusinessByIdQuery,
+  GetSimilarBusinessByIdQuery,
+} from "@/services/queries";
 import { Center, Container, Grid, Loader } from "@mantine/core";
 import { signIn, useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
-import { useQuery } from "urql";
+import { useMutation, useQuery } from "urql";
 import Info from "../_components/Info";
 import styles from "./styles.module.scss";
 import SimilarBusinesses from "../_components/SimilarBusinesses";
@@ -29,6 +33,27 @@ const BusinessDetails = (props: Props) => {
     },
   });
 
+  const [createBookingResult, createBookingMutation] = useMutation(CreateBookingMutation);
+
+  const createBooking = async (date: string, time: string) => {
+    try {
+      const result = await createBookingMutation({
+        id: businessId,
+        date,
+        time,
+        userEmail: data?.user?.email,
+        userName: data?.user?.email,
+      });
+      if (result.error) {
+        console.log(result.error);
+        return;
+      }
+      alert(result.data?.createBooking?.id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (status === "loading" || fetching) {
     return (
       <Center h={"100dvh"}>
@@ -50,7 +75,11 @@ const BusinessDetails = (props: Props) => {
             <Description description={business?.businessList?.about} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 3 }}>
-            <SimilarBusinesses similarBusinesses={similarBusinesses?.businessLists} />
+            <SimilarBusinesses
+              similarBusinesses={similarBusinesses?.businessLists}
+              createBooking={createBooking}
+              businessId={businessId}
+            />
           </Grid.Col>
         </Grid>
       </Container>

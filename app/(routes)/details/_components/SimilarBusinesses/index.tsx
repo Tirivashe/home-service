@@ -1,11 +1,15 @@
-import { Box, Button, Group, Image, Stack, Text, Title, rem } from "@mantine/core";
+"use client";
+import { Button, Group, Image, Stack, Text, Title, rem } from "@mantine/core";
 import NextImage from "next/image";
 import { IconNotebook } from "@tabler/icons-react";
-import React from "react";
 import styles from "./style.module.scss";
 import { useRouter } from "next/navigation";
+import { useDisclosure } from "@mantine/hooks";
+import DatePicker from "@/components/DatePicker";
 
 type Props = {
+  businessId: string;
+  createBooking: (date: string, time: string) => Promise<void>;
   similarBusinesses:
     | {
         images: {
@@ -19,11 +23,15 @@ type Props = {
     | undefined;
 };
 
-const SimilarBusinesses = ({ similarBusinesses }: Props) => {
+const SimilarBusinesses = ({ businessId, createBooking, similarBusinesses }: Props) => {
   const navigate = useRouter();
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <Stack>
-      <Button leftSection={<IconNotebook />}>Book Appointment</Button>
+      <Button leftSection={<IconNotebook />} onClick={open}>
+        Book Appointment
+      </Button>
       <Stack>
         <Title order={4}>Similar Businesses</Title>
         {similarBusinesses?.map((business) => (
@@ -58,6 +66,12 @@ const SimilarBusinesses = ({ similarBusinesses }: Props) => {
           </Group>
         ))}
       </Stack>
+      <DatePicker
+        opened={opened}
+        close={close}
+        createBooking={createBooking}
+        businessId={businessId}
+      />
     </Stack>
   );
 };
