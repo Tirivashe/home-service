@@ -1,0 +1,19 @@
+@import "/_mantine.scss";
+
+.root {
+  &[data-size="responsive"] {
+    max-width: 70%;
+
+    @include smaller-than($mantine-breakpoint-md) {
+      max-width: 80%;
+    }
+
+    @include smaller-than($mantine-breakpoint-sm) {
+      max-width: 90%;
+    }
+
+    @include smaller-than($mantine-breakpoint-xs) {
+      max-width: 100%;
+    }
+  }
+}
