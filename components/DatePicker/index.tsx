@@ -38,7 +38,7 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
 
   useEffect(() => {
     reexecuteQuery();
-  }, [value, reexecuteQuery, existingBookings]);
+  }, [value, reexecuteQuery]);
 
   const bookAppointment = async () => {
     if (!(value && selectedSlot)) {
