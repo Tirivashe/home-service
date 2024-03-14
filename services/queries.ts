@@ -1,4 +1,3 @@
-"use client";
 import { graphql } from "gql.tada";
 
 export const GetCategoriesQuery = graphql(`
@@ -98,8 +97,12 @@ export const GetBookingsByBusinessIdQuery = graphql(`
 `);
 
 export const GetUserBookingHistoryQuery = graphql(`
-  query UserBookingHistory($userEmail: String) {
-    bookings(where: { userEmail: $userEmail }) {
+  query UserBookingHistory($userEmail: String, $status: ProgressStatus) {
+    bookings(
+      orderBy: publishedAt_DESC
+      where: { userEmail: $userEmail, AND: { bookingStatus: $status } }
+    ) {
+      id
       businessList {
         name
         contactPerson
