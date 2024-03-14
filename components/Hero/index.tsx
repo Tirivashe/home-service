@@ -10,7 +10,7 @@ const Hero = (props: Props) => {
   const theme = useMantineTheme();
 
   return (
-    <Stack justify="center" my={em(70)} pb="md" px="lg">
+    <Stack justify="center" my={em(120)} pb="md" px="lg">
       <Title order={2} size="42px" style={{ textAlign: "center" }}>
         Find A Home
         <Text span inherit c="logo-orange">
