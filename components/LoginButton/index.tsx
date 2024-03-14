@@ -3,6 +3,7 @@ import { Avatar, Button, Menu, rem } from "@mantine/core";
 import { IconLogout } from "@tabler/icons-react";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -20,7 +21,9 @@ const LoginButton = ({ data }: Props) => {
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Label>Account</Menu.Label>
-          <Menu.Item>My Bookings</Menu.Item>
+          <Menu.Item component={Link} href="/booking-history">
+            My Bookings
+          </Menu.Item>
           <Menu.Divider />
           <Menu.Label>Danger zone</Menu.Label>
           <Menu.Item
