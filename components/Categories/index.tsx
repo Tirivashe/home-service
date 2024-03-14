@@ -18,7 +18,7 @@ const Categories = (props: Props) => {
   if (fetching) {
     return (
       <Center component="section">
-        <SimpleGrid cols={{ base: 1, xs: 2, sm: 3, lg: 6 }} verticalSpacing="sm">
+        <SimpleGrid cols={{ base: 2, sm: 3, lg: 6 }} verticalSpacing="sm">
           {[0, 1, 2, 3, 4, 5].map((element) => (
             <Skeleton key={element} height={120} width={140} animate radius="1rem" />
           ))}
