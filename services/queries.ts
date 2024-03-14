@@ -96,3 +96,20 @@ export const GetBookingsByBusinessIdQuery = graphql(`
     }
   }
 `);
+
+export const GetUserBookingHistoryQuery = graphql(`
+  query UserBookingHistory($userEmail: String) {
+    bookings(where: { userEmail: $userEmail }) {
+      businessList {
+        name
+        contactPerson
+        address
+        images {
+          url
+        }
+      }
+      date
+      time
+    }
+  }
+`);
