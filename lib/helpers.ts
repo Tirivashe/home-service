@@ -21,6 +21,6 @@ export const getTimeSlots = () => {
     });
   }
 
-  timeList.push({ time: "6:00PM" });
+  timeList.push({ time: "6:00 PM" });
   return timeList;
 };

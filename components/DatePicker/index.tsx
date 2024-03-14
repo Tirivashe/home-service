@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useQuery } from "urql";
 import { GetBookingsByBusinessIdQuery } from "@/services/queries";
+import dayjs from "dayjs";
 
 type Props = {
   businessId: string;
@@ -22,14 +23,29 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
     query: GetBookingsByBusinessIdQuery,
     variables: {
       id: businessId,
-      date: value?.toDateString(),
+      date: dayjs(value).format("MMM DD, YYYY"),
     },
     pause: !value,
   });
 
-  const isSlotAlreadyBooked = (timeSlot: string) => {
+  const isSlotAvailable = (timeSlot: string) => {
     const bookedSlot = existingBookings?.bookings.find((booking) => booking.time === timeSlot);
-    return !!bookedSlot;
+    const fullBookingDate = dayjs(value).format("MMM DD, YYYY") + " " + timeSlot;
+    return !!bookedSlot || new Date(fullBookingDate).getTime() < Date.now();
+  };
+  const bookAppointment = async () => {
+    if (!(value && selectedSlot)) {
+      return;
+    }
+
+    if (isSlotAvailable(selectedSlot)) {
+      return;
+    }
+
+    close();
+    await createBooking(dayjs(value).format("MMM DD, YYYY"), selectedSlot);
+    setValue(null);
+    setSelectedSlot("");
   };
 
   useEffect(() => {
@@ -39,21 +55,6 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
   useEffect(() => {
     reexecuteQuery();
   }, [value, reexecuteQuery]);
-
-  const bookAppointment = async () => {
-    if (!(value && selectedSlot)) {
-      return;
-    }
-
-    if (isSlotAlreadyBooked(selectedSlot)) {
-      return;
-    }
-
-    close();
-    await createBooking(value.toDateString(), selectedSlot);
-    setValue(null);
-    setSelectedSlot("");
-  };
 
   return (
     <Drawer
@@ -68,7 +69,13 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
       <Text fw="bold" size="sm" mt="xl" mb="md">
         Select Date
       </Text>
-      <MantineDatePicker value={value} onChange={setValue} className={styles.datepicker} />
+      <MantineDatePicker
+        value={value}
+        onChange={setValue}
+        className={styles.datepicker}
+        minDate={new Date()}
+        hideOutsideDates
+      />
       <Text fw="bold" size="sm" mt="xl" mb="md">
         Select Time Slot
       </Text>
@@ -82,7 +89,7 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
             data-selected={slot.time === selectedSlot}
             className={styles.timeslot}
             onClick={() => setSelectedSlot(slot.time)}
-            disabled={isSlotAlreadyBooked(slot.time)}
+            disabled={isSlotAvailable(slot.time)}
           >
             {slot.time}
           </Button>
