@@ -48,7 +48,7 @@ const BusinessDetails = (props: Props) => {
         console.log(result.error);
         return;
       }
-      alert(result.data?.createBooking?.id);
+      alert(result.data?.createBooking?.id); // TODO: implement proper notification fxn
     } catch (error) {
       console.error(error);
     }
