@@ -12,7 +12,6 @@ type Props = {
 };
 
 const BusinessList = ({ title = "Popular Businesses", categoryName = "cleaning" }: Props) => {
-  // TODO: remove fetch from here only if it is used in one component
   const [{ data, fetching }] = useQuery({
     query: GetBusinessByCategoryQuery,
     variables: { name: categoryName },
