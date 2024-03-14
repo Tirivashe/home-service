@@ -10,7 +10,7 @@ const Hero = (props: Props) => {
   const theme = useMantineTheme();
 
   return (
-    <Stack justify="center" mt={em(70)} pb="md" px="lg">
+    <Stack justify="center" my={em(70)} pb="md" px="lg">
       <Title order={2} size="42px" style={{ textAlign: "center" }}>
         Find A Home
         <Text span inherit c="logo-orange">
@@ -22,10 +22,10 @@ const Hero = (props: Props) => {
       <Text c="gray.5" size="xl" style={{ textAlign: "center" }}>
         Explore The Best Home Services Near You
       </Text>
-      <Group justify="center" align="center">
-        <TextInput py="md" placeholder="Search" radius="lg" />
+      {/* <Group justify="center" align="center">
+        <TextInput py="md" placeholder="Search" radius="lg" /> //TODO: implement search feature
         <IconSearch className={styles.icon} size="2rem" />
-      </Group>
+      </Group> */}
     </Stack>
   );
 };
