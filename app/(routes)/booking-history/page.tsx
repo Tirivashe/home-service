@@ -15,7 +15,7 @@ const BookingHistory = (props: Props) => {
       </Title>
       <Tabs variant="pills" defaultValue="bookings">
         <Tabs.List>
-          <Tabs.Tab value="bookings">Bookings</Tabs.Tab>
+          <Tabs.Tab value="bookings">Booked</Tabs.Tab>
           <Tabs.Tab value="completed">Completed</Tabs.Tab>
           <Tabs.Tab value="canceled">Canceled</Tabs.Tab>
         </Tabs.List>
