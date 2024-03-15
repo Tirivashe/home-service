@@ -16,8 +16,8 @@ import { UrqlProvider } from "@/urql/client";
 import NextAuthSessionProvider from "./provider";
 
 export const metadata = {
-  title: "My Mantine app",
-  description: "I have followed setup instructions carefully",
+  title: "Home Service App",
+  description: "Find a Home Service and Repair Near You",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
