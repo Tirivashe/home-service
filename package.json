@@ -12,6 +12,7 @@
     "@mantine/core": "^7.6.2",
     "@mantine/dates": "^7.6.2",
     "@mantine/hooks": "^7.6.2",
+    "@mantine/notifications": "^7.6.2",
     "@tabler/icons-react": "^2.47.0",
     "dayjs": "^1.11.10",
     "gql.tada": "^1.3.2",
