@@ -13,7 +13,7 @@ import Info from "../_components/Info";
 import styles from "./styles.module.scss";
 import SimilarBusinesses from "../_components/SimilarBusinesses";
 import Description from "../_components/Description";
-import { Notifications, notifications } from "@mantine/notifications";
+import { notifications } from "@mantine/notifications";
 import { IconCheck } from "@tabler/icons-react";
 import { IconX } from "@tabler/icons-react";
 
@@ -73,7 +73,7 @@ const BusinessDetails = (props: Props) => {
           id: createBookingStatus,
           color: "teal",
           loading: false,
-          message: "Your booking has been successfully created.",
+          message: "Your booking has been created successfully.",
           title: "Success!",
           autoClose: 3000,
           withCloseButton: false,
@@ -101,7 +101,6 @@ const BusinessDetails = (props: Props) => {
   if (status === "authenticated") {
     return (
       <Container size="responsive" className={styles.root} p="lg" mt="xl">
-        <Notifications />
         <Info business={business?.businessList} />
         <Grid py="xl" mt="lg">
           <Grid.Col span={{ base: 12, md: 9 }}>
