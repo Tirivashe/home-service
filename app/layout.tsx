@@ -14,6 +14,7 @@ import Header from "@/components/Header";
 import { resolver, theme } from "@/theme";
 import { UrqlProvider } from "@/urql/client";
 import NextAuthSessionProvider from "./provider";
+import { Notifications } from "@mantine/notifications";
 
 export const metadata = {
   title: "Home Service App",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NextAuthSessionProvider>
           <UrqlProvider>
             <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+              <Notifications />
               <AppShell header={{ height: 70 }}>
                 <AppShellHeader>
                   <Header />
