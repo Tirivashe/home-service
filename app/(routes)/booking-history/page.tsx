@@ -13,7 +13,7 @@ const BookingHistory = (props: Props) => {
       <Title order={2} fw="bolder" my="lg">
         My Bookings
       </Title>
-      <Tabs variant="pills" defaultValue="bookings">
+      <Tabs variant="pills" defaultValue="bookings" classNames={{ list: styles.tabList }}>
         <Tabs.List>
           <Tabs.Tab value="bookings">Booked</Tabs.Tab>
           <Tabs.Tab value="completed">Completed</Tabs.Tab>

@@ -17,3 +17,12 @@
     }
   }
 }
+
+.tabList {
+  background-color: var(--mantine-color-gray-1);
+  border-radius: var(--mantine-radius-sm);
+
+  @include dark {
+    background-color: var(--mantine-color-gray-9);
+  }
+}
