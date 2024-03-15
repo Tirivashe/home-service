@@ -81,8 +81,12 @@ export const CreateBookingMutation = graphql(`
     ) {
       id
     }
-    publishManyBookings(to: PUBLISHED) {
-      count
+    publishManyBookingsConnection(to: PUBLISHED) {
+      edges {
+        node {
+          id
+        }
+      }
     }
   }
 `);
@@ -92,6 +96,7 @@ export const GetBookingsByBusinessIdQuery = graphql(`
     bookings(where: { businessList: { id: $id }, date: $date }) {
       date
       time
+      bookingStatus
     }
   }
 `);
