@@ -44,6 +44,7 @@ const BusinessDetails = (props: Props) => {
       message: "We are booking your appointment for you.",
       loading: true,
       withBorder: true,
+      autoClose: false,
     });
     try {
       const result = await createBookingMutation({
