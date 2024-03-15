@@ -121,3 +121,18 @@ export const GetUserBookingHistoryQuery = graphql(`
     }
   }
 `);
+
+export const UpdateBookingStatusMutation = graphql(`
+  mutation ChangeBookingStatus($id: ID, $status: ProgressStatus) {
+    updateBooking(data: { bookingStatus: $status }, where: { id: $id }) {
+      id
+    }
+    publishManyBookingsConnection(to: PUBLISHED) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
+`);
