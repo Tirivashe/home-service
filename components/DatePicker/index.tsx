@@ -28,17 +28,19 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
     pause: !value,
   });
 
-  const isSlotAvailable = (timeSlot: string) => {
+  const isSlotUnavailable = (timeSlot: string) => {
     const bookedSlot = existingBookings?.bookings.find((booking) => booking.time === timeSlot);
     const fullBookingDate = dayjs(value).format("MMM DD, YYYY") + " " + timeSlot;
-    return !!bookedSlot || new Date(fullBookingDate).getTime() < Date.now();
+    return (
+      bookedSlot?.bookingStatus === "Booked" || new Date(fullBookingDate).getTime() < Date.now()
+    );
   };
   const bookAppointment = async () => {
     if (!(value && selectedSlot)) {
       return;
     }
 
-    if (isSlotAvailable(selectedSlot)) {
+    if (isSlotUnavailable(selectedSlot)) {
       return;
     }
 
@@ -89,7 +91,7 @@ const DatePicker = ({ businessId, createBooking, opened, close }: Props) => {
             data-selected={slot.time === selectedSlot}
             className={styles.timeslot}
             onClick={() => setSelectedSlot(slot.time)}
-            disabled={isSlotAvailable(slot.time)}
+            disabled={isSlotUnavailable(slot.time)}
           >
             {slot.time}
           </Button>
