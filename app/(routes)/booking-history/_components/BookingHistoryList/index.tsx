@@ -57,6 +57,7 @@ const BookingHistoryList = ({ status }: Props) => {
       loading: true,
       withBorder: true,
       autoClose: false,
+      withCloseButton: false,
     });
 
     try {
@@ -72,8 +73,7 @@ const BookingHistoryList = ({ status }: Props) => {
           loading: false,
           message: "Something went wrong, we could not change your booking.",
           title: "Error",
-          autoClose: 3000,
-          withCloseButton: false,
+          autoClose: 3500,
           icon: <IconX style={{ width: rem(18), height: rem(18) }} />,
         });
         console.error(result.error.message);
@@ -87,8 +87,7 @@ const BookingHistoryList = ({ status }: Props) => {
           loading: false,
           message: "Your booking status has been changed successfully.",
           title: "Success!",
-          autoClose: 3000,
-          withCloseButton: false,
+          autoClose: 3500,
           withBorder: true,
           icon: <IconCheck style={{ width: rem(18), height: rem(18) }} />,
         });
@@ -148,7 +147,7 @@ const BookingHistoryList = ({ status }: Props) => {
                 </Text>
               </Group>
               {status === "Booked" && (
-                <Button onClick={() => handleOpenModal(bookingId)} size="compact-xs">
+                <Button onClick={() => handleOpenModal(booking.id)} size="compact-xs">
                   Change Status
                 </Button>
               )}

@@ -45,6 +45,7 @@ const BusinessDetails = (props: Props) => {
       loading: true,
       withBorder: true,
       autoClose: false,
+      withCloseButton: false,
     });
     try {
       const result = await createBookingMutation({
@@ -61,8 +62,7 @@ const BusinessDetails = (props: Props) => {
           loading: false,
           message: "Something went wrong, we could not book your appointment.",
           title: "Error",
-          autoClose: 3000,
-          withCloseButton: false,
+          autoClose: 3500,
           icon: <IconX style={{ width: rem(18), height: rem(18) }} />,
         });
         console.error(result.error.message);
@@ -75,8 +75,7 @@ const BusinessDetails = (props: Props) => {
           loading: false,
           message: "Your booking has been created successfully.",
           title: "Success!",
-          autoClose: 3000,
-          withCloseButton: false,
+          autoClose: 3500,
           withBorder: true,
           icon: <IconCheck style={{ width: rem(18), height: rem(18) }} />,
         });
