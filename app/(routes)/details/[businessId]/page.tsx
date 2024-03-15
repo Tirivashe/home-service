@@ -53,7 +53,7 @@ const BusinessDetails = (props: Props) => {
         date,
         time,
         userEmail: data?.user?.email,
-        userName: data?.user?.email,
+        userName: data?.user?.name,
       });
       if (result.error) {
         notifications.update({
