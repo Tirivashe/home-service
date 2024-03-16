@@ -19,7 +19,7 @@ import styles from "./styles.module.scss";
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import LoginButton from "../LoginButton";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -32,7 +32,9 @@ const Header = (props: Props) => {
   const colorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
-  const navigate = useRouter()
+  const navigate = useRouter();
+  const categoryRoutes = ["cleaning", "repair", "painting", "shifting", "plumbing", "electric"];
+  const randomCategory = categoryRoutes[Math.floor(Math.random() * categoryRoutes.length)];
   const sunIcon = (
     <IconSun
       style={{ width: rem(16), height: rem(16) }}
@@ -63,8 +65,12 @@ const Header = (props: Props) => {
         </Title>
       </Group>
       <Group component="nav" gap="sm" visibleFrom="md" className={styles.navlinks}>
-        <Button onClick={() => navigate.push("/")} variant="transparent">Home</Button>
-        <Button variant="transparent">Services</Button>
+        <Button onClick={() => navigate.push("/")} variant="transparent">
+          Home
+        </Button>
+        <Button onClick={() => navigate.push(`/search/${randomCategory}`)} variant="transparent">
+          Services
+        </Button>
         <Button variant="transparent">Explore</Button>
         <Button variant="transparent">About Us</Button>
       </Group>
