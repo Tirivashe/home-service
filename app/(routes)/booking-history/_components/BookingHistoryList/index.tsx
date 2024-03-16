@@ -2,8 +2,10 @@ import { GetUserBookingHistoryQuery, UpdateBookingStatusMutation } from "@/servi
 import {
   Badge,
   Button,
+  Center,
   Group,
   Image,
+  Loader,
   Modal,
   Select,
   SimpleGrid,
@@ -31,15 +33,14 @@ type Props = {
 };
 
 const BookingHistoryList = ({ status }: Props) => {
-  const { data } = useSession();
+  const { data, status: authStatus } = useSession();
   const [opened, { open, close }] = useDisclosure(false);
   const [newStatus, setNewStatus] = useState<string | null>("");
   const [bookingId, setBookingId] = useState<string | number>("");
 
-  const [{ data: userBookings }] = useQuery({
+  const [{ data: userBookings, fetching }] = useQuery({
     query: GetUserBookingHistoryQuery,
     variables: { userEmail: data?.user?.email, status },
-    pause: !data,
   });
 
   const [_, updateBookingMutation] = useMutation(UpdateBookingStatusMutation);
@@ -96,6 +97,14 @@ const BookingHistoryList = ({ status }: Props) => {
       console.error(error);
     }
   };
+
+  if (authStatus === "loading" || fetching) {
+    return (
+      <Center>
+        <Loader type="dots" />
+      </Center>
+    );
+  }
 
   return (
     <>
