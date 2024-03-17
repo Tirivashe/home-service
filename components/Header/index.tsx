@@ -85,8 +85,8 @@ const Header = (props: Props) => {
           <Button onClick={() => navigate.push(`/search/${randomCategory}`)} variant="transparent">
             Services
           </Button>
-          <Button variant="transparent">Explore</Button>
-          <Button variant="transparent">About Us</Button>
+          {/* <Button variant="transparent">Explore</Button>
+          <Button variant="transparent">About Us</Button> */}
         </Group>
         <Group gap="sm" align="center">
           <Switch
@@ -118,8 +118,8 @@ const Header = (props: Props) => {
           onClick={close}
           label="Services"
         />
-        <NavLink variant="subtle" component={Link} href="#" label="Explore" />
-        <NavLink variant="subtle" component={Link} href="#" label="About Us" />
+        {/* <NavLink variant="subtle" component={Link} href="#" label="Explore" />
+        <NavLink variant="subtle" component={Link} href="#" label="About Us" /> */}
       </Drawer>
     </>
   );
