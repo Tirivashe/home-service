@@ -81,7 +81,7 @@ export const CreateBookingMutation = graphql(`
     ) {
       id
     }
-    publishManyBookingsConnection(to: PUBLISHED) {
+    publishManyBookingsConnection(first: 300, to: PUBLISHED) {
       edges {
         node {
           id
@@ -93,7 +93,7 @@ export const CreateBookingMutation = graphql(`
 
 export const GetBookingsByBusinessIdQuery = graphql(`
   query BookingsByBusinessId($id: ID, $date: String) {
-    bookings(where: { businessList: { id: $id }, date: $date }) {
+    bookings(where: { businessList: { id: $id }, date: $date }, first: 300) {
       date
       time
       bookingStatus
@@ -106,6 +106,7 @@ export const GetUserBookingHistoryQuery = graphql(`
     bookings(
       orderBy: publishedAt_DESC
       where: { userEmail: $userEmail, AND: { bookingStatus: $status } }
+      first: 300
     ) {
       id
       businessList {
@@ -127,12 +128,8 @@ export const UpdateBookingStatusMutation = graphql(`
     updateBooking(data: { bookingStatus: $status }, where: { id: $id }) {
       id
     }
-    publishManyBookingsConnection(to: PUBLISHED) {
-      edges {
-        node {
-          id
-        }
-      }
+    publishBooking(where: { id: $id }, to: PUBLISHED) {
+      id
     }
   }
 `);
