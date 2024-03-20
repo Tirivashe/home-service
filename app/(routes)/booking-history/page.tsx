@@ -1,15 +1,18 @@
 "use client";
 
 import { Center, Container, Loader, Tabs, Title } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import BookingHistoryList from "./_components/BookingHistoryList";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 type Props = {};
+const bookingStatusConstants = ["Booked", "Completed", "Canceled"] as const;
+export type BookingStatus = (typeof bookingStatusConstants)[number];
 
 const BookingHistory = (props: Props) => {
+  const [bookingStatus, setBookingStatus] = useState<BookingStatus>("Booked");
   const { status } = useSession();
   if (status === "loading") {
     return (
@@ -27,21 +30,19 @@ const BookingHistory = (props: Props) => {
       <Title order={2} fw="bolder" my="lg">
         My Bookings
       </Title>
-      <Tabs variant="pills" defaultValue="bookings" classNames={{ list: styles.tabList }}>
+      <Tabs variant="pills" defaultValue={bookingStatus} classNames={{ list: styles.tabList }}>
         <Tabs.List>
-          <Tabs.Tab value="bookings">Booked</Tabs.Tab>
-          <Tabs.Tab value="completed">Completed</Tabs.Tab>
-          <Tabs.Tab value="canceled">Canceled</Tabs.Tab>
+          {bookingStatusConstants.map((status) => (
+            <Tabs.Tab key={status} value={status} onClick={() => setBookingStatus(status)}>
+              {status}
+            </Tabs.Tab>
+          ))}
         </Tabs.List>
-        <Tabs.Panel value="bookings">
-          <BookingHistoryList status="Booked" />
-        </Tabs.Panel>
-        <Tabs.Panel value="completed">
-          <BookingHistoryList status="Completed" />
-        </Tabs.Panel>
-        <Tabs.Panel value="canceled">
-          <BookingHistoryList status="Canceled" />
-        </Tabs.Panel>
+        {bookingStatusConstants.map((status) => (
+          <Tabs.Panel key={status} value={status}>
+            <BookingHistoryList status={status} />
+          </Tabs.Panel>
+        ))}
       </Tabs>
     </Container>
   );
