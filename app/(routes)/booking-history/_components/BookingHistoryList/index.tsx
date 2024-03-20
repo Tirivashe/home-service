@@ -65,7 +65,7 @@ const BookingHistoryList = ({ status }: Props) => {
     try {
       const result = await updateBookingMutation({
         id: bookingId,
-        status: newStatus as "Booked" | "Completed" | "Canceled",
+        status: newStatus as BookingStatus,
       });
 
       if (result.error) {
