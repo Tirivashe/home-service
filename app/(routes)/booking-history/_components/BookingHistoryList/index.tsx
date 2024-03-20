@@ -27,9 +27,10 @@ import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import React, { useState } from "react";
 import { useMutation, useQuery } from "urql";
+import { BookingStatus } from "../../page";
 
 type Props = {
-  status: "Booked" | "Canceled" | "Completed";
+  status: BookingStatus;
 };
 
 const BookingHistoryList = ({ status }: Props) => {
